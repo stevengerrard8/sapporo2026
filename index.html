@@ -1,0 +1,1665 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>삿포로 3박 4일 여행 일정표 (2026.09.11 ~ 09.14)</title>
+  <style>
+    :root {
+      --primary: #2B6CB0;
+      --primary-light: #EBF8FF;
+      --primary-dark: #1A365D;
+      --accent: #DD6B20;
+      --accent-light: #FEEBC8;
+      --bg: #F7FAFC;
+      --card-bg: #FFFFFF;
+      --text-main: #2D3748;
+      --text-muted: #718096;
+      --border: #E2E8F0;
+      --day1: #3182CE;
+      --day2: #38A169;
+      --day3: #805AD5;
+      --day4: #E53E3E;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+      background-color: var(--bg);
+      color: var(--text-main);
+      line-height: 1.5;
+      padding-bottom: 85px;
+    }
+    .header {
+      background: linear-gradient(135deg, #1A365D 0%, #2B6CB0 100%);
+      color: white;
+      padding: 20px 18px 16px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+    }
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 5px;
+    }
+    .header-tag {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      background: rgba(255,255,255,0.22);
+      padding: 3px 8px;
+      border-radius: 12px;
+    }
+    .trip-dates-badge {
+      font-size: 11px;
+      font-weight: 700;
+      background: #F6AD55;
+      color: #7B341E;
+      padding: 3px 8px;
+      border-radius: 12px;
+    }
+    .header-title {
+      font-size: 19px;
+      font-weight: 800;
+      margin-bottom: 3px;
+    }
+    .header-sub {
+      font-size: 12px;
+      opacity: 0.9;
+    }
+
+    .status-banner {
+      background: #FFFFFF;
+      border-bottom: 1px solid var(--border);
+      padding: 10px 16px;
+      font-size: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+    }
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 700;
+      color: var(--primary);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      max-width: 78%;
+    }
+    .live-dot {
+      width: 8px;
+      height: 8px;
+      min-width: 8px;
+      background-color: #38A169;
+      border-radius: 50%;
+      display: inline-block;
+    }
+    .live-dot.ready {
+      background-color: #DD6B20;
+    }
+    .live-dot.active {
+      background-color: #E53E3E;
+      animation: pulse-dot 1.5s infinite;
+    }
+    @keyframes pulse-dot {
+      0% { transform: scale(0.9); opacity: 0.7; }
+      50% { transform: scale(1.3); opacity: 1; }
+      100% { transform: scale(0.9); opacity: 0.7; }
+    }
+
+    .day-tabs {
+      display: flex;
+      background: white;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 84px;
+      z-index: 99;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+    }
+    .day-tabs::-webkit-scrollbar {
+      display: none;
+    }
+    .tab-btn {
+      flex: 1;
+      min-width: 70px;
+      padding: 10px 2px;
+      text-align: center;
+      background: none;
+      border: none;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-muted);
+      cursor: pointer;
+      position: relative;
+      transition: all 0.2s;
+    }
+    .tab-btn.active {
+      color: var(--primary);
+    }
+    .tab-btn.active::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 15%;
+      width: 70%;
+      height: 3px;
+      background-color: var(--primary);
+      border-radius: 3px 3px 0 0;
+    }
+    .tab-btn span {
+      display: block;
+      font-size: 10px;
+      font-weight: 400;
+      margin-top: 2px;
+    }
+
+    .container {
+      padding: 16px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .day-summary-card {
+      background: white;
+      border-radius: 14px;
+      padding: 15px;
+      margin-bottom: 16px;
+      border: 1px solid var(--border);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+    }
+    .summary-badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 3px 10px;
+      border-radius: 6px;
+      color: white;
+      margin-bottom: 8px;
+    }
+    .day-1 .summary-badge { background-color: var(--day1); }
+    .day-2 .summary-badge { background-color: var(--day2); }
+    .day-3 .summary-badge { background-color: var(--day3); }
+    .day-4 .summary-badge { background-color: var(--day4); }
+    
+    .summary-title {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-bottom: 5px;
+    }
+    .summary-desc {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    .timeline {
+      position: relative;
+      padding-left: 20px;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 7px;
+      top: 8px;
+      bottom: 15px;
+      width: 2px;
+      background: #CBD5E0;
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 16px;
+      transition: all 0.3s ease;
+    }
+    .timeline-dot {
+      position: absolute;
+      left: -20px;
+      top: 14px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: white;
+      border: 3px solid #718096;
+      box-sizing: border-box;
+      z-index: 1;
+    }
+    .timeline-item.move .timeline-dot { border-color: #3182CE; }
+    .timeline-item.food .timeline-dot { border-color: #E53E3E; }
+    .timeline-item.tour .timeline-dot { border-color: #38A169; }
+    .timeline-item.shop .timeline-dot { border-color: #D69E2E; }
+    .timeline-item.stay .timeline-dot { border-color: #805AD5; }
+
+    .timeline-item.current-active {
+      transform: scale(1.02);
+    }
+    .timeline-item.current-active .timeline-dot {
+      border-color: #E53E3E !important;
+      background: #E53E3E !important;
+      box-shadow: 0 0 0 4px rgba(229, 62, 62, 0.28);
+    }
+    .timeline-item.current-active .card {
+      border: 2px solid #3182CE !important;
+      box-shadow: 0 8px 24px rgba(49, 130, 206, 0.22) !important;
+      background: linear-gradient(to bottom, #FFFFFF 0%, #F7FAFC 100%);
+    }
+    .current-pill {
+      display: none;
+      background: #3182CE;
+      color: white;
+      font-size: 10px;
+      font-weight: 800;
+      padding: 2px 7px;
+      border-radius: 10px;
+      letter-spacing: 0.3px;
+    }
+    .timeline-item.current-active .current-pill {
+      display: inline-block;
+      animation: pulse-pill 2s infinite;
+    }
+    @keyframes pulse-pill {
+      0% { opacity: 0.85; }
+      50% { opacity: 1; transform: scale(1.05); }
+      100% { opacity: 0.85; }
+    }
+
+    .card {
+      background: white;
+      border-radius: 12px;
+      padding: 14px;
+      border: 1px solid var(--border);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+      transition: border 0.3s, box-shadow 0.3s;
+    }
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 6px;
+    }
+    .header-badges {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .time-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #4A5568;
+      background: #EDF2F7;
+      padding: 3px 8px;
+      border-radius: 6px;
+    }
+    .type-badge {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 4px;
+    }
+    .badge-move { background: #EBF8FF; color: #2B6CB0; }
+    .badge-food { background: #FFF5F5; color: #C53030; }
+    .badge-tour { background: #F0FFF4; color: #276749; }
+    .badge-shop { background: #FEFCBF; color: #975A16; }
+    .badge-stay { background: #FAF5FF; color: #6B46C1; }
+    .badge-skip { background: #FFF5F5; color: #E53E3E; border: 1px solid #FEB2B2; font-weight: 800; }
+
+    .card-title {
+      font-size: 15px;
+      font-weight: 800;
+      color: #1A202C;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+    .title-link {
+      color: #1A202C;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      flex: 1;
+    }
+    .title-link:hover, .title-link:active {
+      color: var(--primary);
+    }
+    .map-btn {
+      font-size: 11px;
+      color: var(--primary);
+      text-decoration: none;
+      padding: 3px 7px;
+      border-radius: 6px;
+      background: var(--primary-light);
+      font-weight: 700;
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      gap: 2px;
+      border: 1px solid #BEE3F8;
+    }
+    .map-btn:active {
+      background: #BEE3F8;
+    }
+    .card-body {
+      font-size: 12.5px;
+      color: #4A5568;
+      line-height: 1.5;
+    }
+    .card-body ul {
+      list-style-type: none;
+      padding-left: 0;
+    }
+    .card-body li {
+      position: relative;
+      padding-left: 14px;
+      margin-top: 3px;
+    }
+    .card-body li::before {
+      content: "•";
+      position: absolute;
+      left: 2px;
+      color: #A0AEC0;
+      font-weight: bold;
+    }
+
+    .place-link {
+      color: var(--primary);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      font-weight: 700;
+    }
+
+    .tip-box {
+      margin-top: 8px;
+      padding: 8px 10px;
+      border-radius: 6px;
+      background: #F7FAFC;
+      border-left: 3px solid #CBD5E0;
+      font-size: 12px;
+    }
+    .tip-box.highlight {
+      background: #FFF5F5;
+      border-left-color: #E53E3E;
+      color: #9B2C2C;
+    }
+    .tip-box.info {
+      background: #EBF8FF;
+      border-left-color: #3182CE;
+      color: #2C5282;
+    }
+    .tip-box.warning {
+      background: #FFFAF0;
+      border-left-color: #DD6B20;
+      color: #9C4221;
+    }
+    .tip-title {
+      font-weight: 700;
+      margin-bottom: 2px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .quick-action-bar {
+      position: fixed;
+      bottom: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: calc(100% - 24px);
+      max-width: 500px;
+      background: rgba(26, 32, 44, 0.96);
+      backdrop-filter: blur(10px);
+      border-radius: 30px;
+      padding: 8px 14px;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.28);
+      z-index: 1000;
+    }
+    .quick-btn {
+      color: white;
+      text-decoration: none;
+      font-size: 11px;
+      font-weight: 600;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+    .quick-btn span:first-child {
+      font-size: 15px;
+    }
+    .quick-btn.now-btn {
+      color: #63B3ED;
+      font-weight: 800;
+    }
+
+    .day-section {
+      display: none;
+    }
+    .day-section.active {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <div class="header-top">
+      <div class="header-tag">HOKKAIDO TRIP</div>
+      <div class="trip-dates-badge">🗓️ 2026.09.11(금) ~ 09.14(월)</div>
+    </div>
+    <h1 class="header-title">❄️ 삿포로 3박 4일 여행 일정표</h1>
+    <div class="header-sub">오타루 당일치기 · 비에이 일일 투어 · 미식 힐링 코스</div>
+  </header>
+
+  <div class="status-banner">
+    <div class="status-badge">
+      <span class="live-dot" id="liveDot"></span>
+      <span id="liveStatusText">일정 파악 중...</span>
+    </div>
+    <button onclick="applySmartFocus(true)" style="background:none; border:none; color:var(--primary); font-size:11px; font-weight:700; cursor:pointer;">
+      🎯 일정 보기
+    </button>
+  </div>
+
+  <nav class="day-tabs">
+    <button class="tab-btn active" id="tab-day-all" onclick="switchDay('day-all', this)">전체보기<span>4일 코스</span></button>
+    <button class="tab-btn" id="tab-day-1" onclick="switchDay('day-1', this)">1일차<span>09.11(금)</span></button>
+    <button class="tab-btn" id="tab-day-2" onclick="switchDay('day-2', this)">2일차<span>09.12(토)</span></button>
+    <button class="tab-btn" id="tab-day-3" onclick="switchDay('day-3', this)">3일차<span>09.13(일)</span></button>
+    <button class="tab-btn" id="tab-day-4" onclick="switchDay('day-4', this)">4일차<span>09.14(월)</span></button>
+  </nav>
+
+  <main class="container">
+
+    <!-- 1일차 : 2026-09-11(금) -->
+    <div id="day-1" class="day-section day-1 active">
+      <div class="day-summary-card">
+        <span class="summary-badge">DAY 1 · 2026.09.11 (금)</span>
+        <h2 class="summary-title">인천 출발 ✈️ 삿포로 도착 및 오타루 당일치기</h2>
+        <p class="summary-desc">신치토세 공항 도착 후 오타루로 이동해 오르골당, 르타오, 운하 야경 감상 후 삿포로 복귀</p>
+      </div>
+
+      <div class="timeline">
+        <div class="timeline-item move" id="item-d1-1" data-start="07:40" data-end="09:20">
+          <div class="timeline-dot"></div>
+          <div class="card">
+            <div class="card-header">
+              <div class="header-badges">
+                <span class="time-badge">⏰ 07:40</span>
+                <span class="type-badge badge-move">출국</span>
+                <span class="current-pill" id="pill-d1-1">● 첫 일정</span>
+              </div>
+            </div>
+            <div class="card-title">
+              <a href="https://www.google.com/maps/search/인천국제공항+제1여객터미널" target="_blank" class="title-link">
+                ✈️ 인천공항 탑승게이트 비행기 탑승
+              </a>
+              <a href="https://www.google.com/maps/search/인천국제공항" target="_blank" class="map-btn">📍 지도</a>
+            </div>
+            <div class="card-body">
+              <ul>
+                <li>인천공항 탑승게이트 도착 및 항공기 탑승 준비</li>
+                <li>기내 수하물 정리 및 출발 대기</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item move" id="item-d1-2" data-start="09:20" data-end="12:12">
+          <div class="timeline-dot"></div>
+          <div class="card">
+            <div class="card-header">
+              <div class="header-badges">
+                <span class="time-badge">⏰ 09:20 ~ 12:12</span>
+                <span class="type-badge badge-move">비행/입국</span>
+                <span class="current-pill">● 지금 일정</span>
+              </div>
+            </div>
+            <div class="card-title">
+              <a href="https://www.google.com/maps/search/신치토세+공항" target="_blank" class="title-link">
+                🛬 신치토세 공항 도착 & 입국수속
+              </a>
+              <a href="https://www.google.com/maps/search/신치토세+공항" target="_blank" class="map-btn">📍 지도</a>
+            </div>
+            <div class="card-body">
+              <ul>
+                <li><a href="https://www.google.com/maps/search/신치토세+공항+국제선" target="_blank" class="place-link">신치토세 공항 국제선</a> 착륙 및 입국 심사, 세관 통과</li>
+                <li>수하물 수령 후 국내선 지하 1층 <a href="https://www.google.com/maps/search/신치토세공항역+JR" target="_blank" class="place-link">신치토세공항역(JR)</a> 탑승장으로 이동</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item move" id="item-d1-3" data-start="12:12" data-end="12:51">
+          <div class="timeline-dot"></div>
+          <div class="card">
+            <div class="card-header">
+              <div class="header-badges">
+                <span class="time-badge">⏰ 12:12 ~ 12:51</span>
+                <span class="type-badge badge-move">JR 이동</span>
+                <span class="current-pill">● 지금 일정</span>
+              </div>
+            </div>
+            <div class="card-title">
+              <a href="https://www.google.com/maps/search/삿포로역" target="_blank" class="title-link">
+                🚆 신치토세 공항 ➔ 삿포로역 이동
+              </a>
+              <a href="https://www.google.com/maps/search/삿포로역" target="_blank" class="map-btn">📍 지도</a>
+            </div>
+            <div class="card-body">
+              <ul>
+                <li><strong>탑승 열차:</strong> JR 쾌속 에어포트 (12:12 출발편 기준 약 37~39분 소요)</li>
+                <li><strong>최신 요금 안내:</strong>
+                  <br>• <strong>성인:</strong> 자유석 1,150엔 / 지정석(u시트) 1,990엔 (기본운임 1,150엔 + u시트권 840엔)
+                  <br>• <strong>어린이:</strong> 자유석 570엔 / 지정석(u시트) 990엔
+                </li>
+              </ul>
+              <div class="tip-box highlight">
+                <div class="tip-title">⚠️ 중요 체크 (좌석 예약)</div>
+                공항에서 삿포로 시내행은 혼잡도가 높으므로 캐리어 보관 공간과 착석이 보장되는 <strong>지정석(u시트) 사전 예약</strong>을 권장합니다.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item stay" id="item-d1-4" data-start="12:51" data-end="13:10">
+          <div class="timeline-dot"></div>
+          <div class="card">
+            <div class="card-header">
+              <div class="header-badges">
+                <span class="time-badge">⏰ 12:51 ~ 13:10</span>
+                <span class="type-badge badge-stay">호텔</span>
+                <span class="current-pill">● 지금 일정</span>
+              </div>
+            </div>
+            <div class="card-title">
+              <a href="https://www.google.com/maps/search/Solaria+Nishitetsu+Hotel+Sapporo" target="_blank" class="title-link">
+                🏨 호텔 이동 & 짐 보관
+              </a>
+              <a href="https://www.google.com/maps/search/Solaria+Nishitetsu+Hotel+Sapporo" target="_blank" class="map-btn">📍 지도</a>
+            </div>
+            <div class="card-body">
+              <ul>
+                <li><a href="https://www.google.com/maps/search/Solaria+Nishitetsu+Hotel+Sapporo" target="_blank" class="place-link">솔라리아 니시테츠 호텔 삿포로</a>로 이동</li>
+                <li>호텔 프런트에 캐리어 짐 보관 (얼리 체크인 가능 시 입실)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item food" id="item-d1-5" data-start="13:10" data-end="14:10">
+          <div class="timeline-dot"></div>
+          <div class="card">
+            <div class="card-header">
+              <div class="header-badges">
+                <span class="time-badge">⏰ 13:10 ~ 14:10</span>
+                <span class="type-badge badge-food">점심식사</span>
+                <span class="current-pill">● 지금 일정</span>
+              </div>
+            </div>
+            <div class="card-title">
+              <span class="title-link">🍛 점심: 수프카레 명가 택1</span>
+              <a href="https://www.google.com/maps/search/SOUP+CURRY+KING+Gateway+Sapporo" target="_blank" class="map-btn">📍 지도</a>
+            </div>
+            <div class="card-body">
+              <ul>
+                <li><strong>후보 1:</strong> <a href="https://www.google.com/maps/search/SOUP+CURRY+KING+Gateway+Sapporo" target="_blank" class="place-link">수프카레 킹 게이트웨이점 (SOUP CURRY KING)</a><br>• 삿포로역 서쪽 요도바시카메라 부근, 진하고 부드러운 W육수 치킨/야채 수프카레</li>
+                <li><strong>후보 2:</strong> <a href="https://www.google.com/maps/search/Soup+Curry+Okushiba+Store+Ekimae+Soseiji" target="_blank" class="place-link">오쿠시바 쇼텐 에키마에 소세이지 (奥芝商店 駅前創成寺)</a><br>• 삿포로역 동쪽 호쿠렌빌딩 B1F, 2,000마리 단새우 머리를 우려낸 깊은 감칠맛의 새우육수 수프카레 & 함박스테이크</li>
+                <li><strong>예상 예산:</strong> 1인당 약 1,800 ~ 2,500엔</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item move" id="item-d1-6" data-start="14:10" data-end="15:05">
+          <div class="timeline-dot"></div>
+          <div class="card">
+            <div class="card-header">
+              <div class="header-badges">
+                <span class="time-badge">⏰ 14:10 ~ 15:05</span>
+                <span class="type-badge badge-move">JR 이동</span>
+                <span class="current-pill">● 지금 일정</span>
+              </div>
+            </div>
+            <div class="card-title">
+              <a href="https://www.google.com/maps/search/미나미오타루역" target="_blank" class="title-link">
+                🚆 삿포로역 ➔ 미나미오타루역 이동
+              </a>
+              <a href="https://www.google.com/maps/search/미나미오타루역" target="_blank" class="map-btn">📍 지도</a>
+            </div>
+            <div class="card-body">
+              <ul>
+                <li>14:10 <a href="https://www.google.com/maps/search/삿포로역" target="_blank" class="place-link">삿포로역</a> JR 탑승구 이동</li>
+                <li>14:30 쾌속 에어포트 89호 탑승 후 오타루 방향 이동 (약 30~35분 소요)</li>
+                <li><strong>운임:</strong> 성인 편도 750엔 / 어린이 370엔 (지정석 u시트 이용 시 +840엔)</li>
+              </ul>
+              <div class="tip-box info">
+                <div class="tip-title">💡 하차역 꿀팁</div>
+                <strong><a href="https://www.google.com/maps/search/미나미오타루역" target="_blank" class="place-link">미나미오타루역(남오타루역)</a>에서 하차!</strong><br>
+                오르골당 본당과 가까워 미나미오타루역 하차 ➔ 오르골당 ➔ 사카이마치 거리 ➔ 운하 방향으로 내려가는 내리막 동선이 가장 편합니다.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item tour" id="item-d1-7" data-start="15:05" data-end="17:00">
+          <div class="timeline-dot"></div>
+          <div class="card">
+            <div class="card-header">
+              <div class="header-badges">
+                <span class="time-badge">⏰ 15:05 ~ 17:00</span>
+                <span class="type-badge badge-tour">관광 1부</span>
+                <span class="current-pill">● 지금 일정</span>
+              </div>
+            </div>
+            <div class="card-title">
+              <a href="https://www.google.com/maps/search/오타루+오르골당+본관" target="_blank" class="title-link">
+                🎵 오타루 오르골당 & 르타오 본점
+              </a>
+              <a href="https://www.google.com/maps/search/오타루+오르골당+본관" target="_blank" class="map-btn">📍 지도</a>
+            </div>
+            <div class="card-body">
+              <ul>
+                <li><a href="https://www.google.com/maps/search/오타루+오르골당+본관" target="_blank" class="place-link">오타루 오르골당 본관</a>: 증기시계 앞 사진 촬영 & 정교한 오르골 기념품 구경</li>
+                <li><a href="https://www.google.com/maps/search/LeTAO+Main+Store+Otaru" target="_blank" class="place-link">르타오 본점(LeTAO)</a>: 더블 프로마쥬 치즈케이크, 슈크림 디저트 타임</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item tour" id="item-d1-8" data-start="17:00" data-end="18:00">
+          <div class="timeline-dot"></div>
+          <div class="card">
+            <div class="card-header">
+              <div class="header-badges">
+                <span class="time-badge">⏰ 17:00 ~ 18:00</span>
+                <span class="type-badge badge-tour">관광 2부</span>
+                <span class="current-pill">● 지금 일정</span>
+              </div>
+            </div>
+            <div class="card-title">
+              <a href="https://www.google.com/maps/search/카마에이+어묵공장+오타루" target="_blank" class="title-link">
+                🍢 사카이마치 거리 & 카마에이 어묵
+              </a>
+              <a href="https://www.google.com/maps/search/카마에이+어묵공장+오타루" target="_blank" class="map-btn">📍 지도</a>
+            </div>
+            <div class="card-body">
+              <ul>
+                <li><a href="https://www.google.com/maps/search/사카이마치도리+오타루" target="_blank" class="place-link">사카이마치 거리</a> 유리공예 공방 및 상점가 산책</li>
+                <li><a href="https://www.google.com/maps/search/카마에이+어묵공장+본점" target="_blank" class="place-link">카마에이 어묵공장 본점</a> 방문 & 갓 튀긴 팡롤, 어묵 간식 맛보기</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item tour" id="item-d1-9" data-start="18:00" data-end="19:00">
+          <div class="timeline-dot"></div>
+          <div class="card">
+            <div class="card-header">
+              <div class="header-badges">
+                <span class="time-badge">⏰ 18:00 ~ 19:00</span>
+                <span class="type-badge badge-tour">관광 3부</span>
+                <span class="current-pill">● 지금 일정</span>
+              </div>
+            </div>
+            <div class="card-title">
+              <a href="https://www.google.com/maps/search/오타루+운하" target="_blank" class="title-link">
+                ✨ 오타루 운하 야경 감상
+              </a>
+              <a href="https://www.google.com/maps/search/오타루+운하" target="_blank" class="map-btn">📍 지도</a>
+            </div>
+            <div class="card-body">
+              <ul>
+                <li>가스등 불빛이 수면에 비치는 로맨틱한 <a href="https://www.google.com/maps/search/오타루+운하" target="_blank" class="place-link">오타루 운하</a> 야경</li>
+                <li><a href="https://www.google.com/maps/search/오타루운하+아사쿠사바시" target="_blank" class="place-link">아사쿠사바시 다리</a> 위 가족 기념사진 촬영 명소</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item food" id="item-d1-10" data-start="19:00" data-end="20:30">
+          <div class="timeline-dot"></div>
+          <div class="card">
+            <div class="card-header">
+              <div class="header-badges">
+                <span class="time-badge">⏰ 19:00 ~ 20:30</span>
+                <span class="type-badge badge-skip">선택 스킵가능</span>
+                <span class="current-pill">● 지금 일정</span>
+              </div>
+            </div>
+            <div class="card-title">
+              <span class="title-link">🍣 오타루 저녁식사 (선택)</span>
+              <a href="https://www.google.com/maps/search/오타루+미요후쿠" target="_blank" class="map-btn">📍 지도</a>
+            </div>
+            <div class="card-body">
+              <ul>
+                <li><strong>1순위:</strong> <a href="https://www.google.com/maps/search/Miyofuku+Otaru" target="_blank" class="place-link">미요후쿠 (스시 노포 맛집)</a></li>
+                <li><strong>2순위:</strong> <a href="https://www.google.com/maps/search/Naruto+Main+Shop+Otaru" target="_blank" class="place-link">나루토 본점 (한마리 닭튀김 정식)</a></li>
+              </ul>
+              <div class="tip-box warning">
+                <div class="tip-title">⚡ 유연한 일정 운영</div>
+                길거리 간식으로 배가 부르거나 웨이팅이 길 경우 스킵하고 바로 삿포로역으로 복귀 추천!
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item move" id="item-d1-11" data-start="20:30" data-end="21:45">
+          <div class="timeline-dot"></div>
+          <div class="card">
+            <div class="card-header">
+              <div class="header-badges">
+                <span class="time-badge">⏰ 20:30 ~ 21:45</span>
+                <span class="type-badge badge-move">JR 이동</span>
+                <span class="current-pill">● 지금 일정</span>
+              </div>
+            </div>
+            <div class="card-title">
+              <a href="https://www.google.com/maps/search/오타루역" target="_blank" class="title-link">
+                🚆 오타루역 ➔ 삿포로역 복귀
+              </a>
+              <a href="https://www.google.com/maps/search/오타루역" target="_blank" class="map-btn">📍 지도</a>
+            </div>
+            <div class="card-body">
+              <ul>
+                <li><a href="https://www.google.com/maps/search/오타루역" target="_blank" class="place-link">오타루역</a>으로 도보 이동 후 삿포로행 JR 열차 탑승</li>
+                <li><strong>운임:</strong> 성인 750엔 / 어린이 370엔</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item stay" id="item-d1-12" data-start="21:45" data-end="24:00">
+          <div class="timeline-dot"></div>
+          <div class="card">
+            <div class="card-header">
+              <div class="header-badges">
+                <span class="time-badge">⏰ 21:45 ~</span>
+                <span class="type-badge badge-stay">휴식 & 야식</span>
+                <span class="current-pill">● 지금 일정</span>
+              </div>
+            </div>
+            <div class="card-title">
+              <a href="https://www.google.com/maps/search/Sapporo+Tsunagu+Yokocho" target="_blank" class="title-link">
+                🏮 숙소 도착 및 츠나구 요코초 야식
+              </a>
+              <a href="https://www.google.com/maps/search/Sapporo+Tsunagu+Yokocho" target="_blank" class="map-btn">📍 지도</a>
+            </div>
+            <div class="card-body">
+              <ul>
+                <li>숙소 복귀 및 휴식</li>
+                <li><strong>야식 추천:</strong> 삿포로역 도보 3분 거리 실내 포장마차촌 <a href="https://www.google.com/maps/search/Sapporo+Tsunagu+Yokocho" target="_blank" class="place-link">츠나구 요코초</a>에서 삿포로 클래식 생맥주와 야키토리</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2일차 : 2026-09-12(토) -->
+    <div id="day-2" class="day-section day-2">
+      <div class="day-summary-card">
+        <span class="summary-badge">DAY 2 · 2026.09.12 (토)</span>
+        <h2 class="summary-title">장외시장 카이센동 🦀 삿포로 맥주박물관 & 오도리 오텀 페스트</h2>
+        <p class="summary-desc">신선한 해산물 아침 식사 후 맥주박물관 시음 및 오텀 페스티벌 즐기기</p>
+      </div>
+
+      <div class="timeline">
+        <div class="timeline-item food" id="item-d2-1" data-start="09:30" data-end="11:30">
+          <div class="timeline-dot"></div>
+          <div class="card">
+            <div class="card-header">
+              <div class="header-badges">
+                <span class="time-badge">⏰ 09:30 ~ 11:30</span>
+                <span class="type-badge badge-food">아침식사</span>
+                <span class="current-pill">● 지금 일정</span>
+              </div>
+            </div>
+            <div class="card-title">
+              <a href="https://www.google.com/maps/search/삿포로+장외시장+기타노구루메" target="_blank" class="title-link">
+                🦀 삿포로 장외시장 "기타노구루메"
+              </a>
+              <a href="https://www.google.com/maps/search/삿포로+장외시장+기타노구루메" target="_blank" class="map-btn">📍 지도</a>
+            </div>
+            <div class="card-body">
+              <ul>
+                <li><a href="https://www.google.com/maps/search/Kitanogurume+Sapporo" target="_blank" class="place-link">해산물 식당 기타노구루메</a>: 신선한 영양 카이센동, 우니, 털게</li>
+                <li><strong>예상 비용:</strong> 카이센동 1그릇당 약 4,000 ~ 6,000엔</li>
+              </ul>
+              <div class="tip-box info">
+                <div class="tip-title">🚌 무료 셔틀버스 정보</div>
+                식당 무료 픽업 셔틀 운행 (08:30 / 09:30 / 10:30 출발)<br>
+                삿포로역 ↔ 장외시장 구간 사전 예약 필수
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item move" id="item-d2-2" data-start="11:30" data-end="12:00">
+          <div class="timeline-dot"></div>
+          <div class="card">
+            <div class="card-header">
+              <div class="header-badges">
+                <span class="time-badge">⏰ 11:30 ~ 12:00</span>
+                <span class="type-badge badge-move">택시 이동</span>
+                <span class="current-pill">● 지금 일정</span>
+              </div>
+            </div>
+            <div class="card-title">
+              <a href="https://www.google.com/maps/search/삿포로+맥주박물관" target="_blank" class="title-link">
+                🚕 장외시장 ➔ 삿포로 맥주박물관
+              </a>
+              <a href="https://www.google.com/maps/search/삿포로+맥주박물관" target="_blank" class="map-btn">📍 지도</a>
+            </div>
+            <div class="card-body">
+              <ul>
+                <li>가족 인원 고려 택시 2대 분할 이동 추천 (1대당 약 1,400엔)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item tour" id="item-d2-3" data-start="12:00" data-end="14:00">
+          <div class="timeline-dot"></div>
+          <div class="card">
+            <div class="card-header">
+              <div class="header-badges">
+                <span class="time-badge">⏰ 12:00 ~ 14:00</span>
+                <span class="type-badge badge-tour">관광/체험</span>
+                <span class="current-pill">● 지금 일정</span>
+              </div>
+            </div>
+            <div class="card-title">
+              <a href="https://www.google.com/maps/search/Sapporo+Beer+Museum" target="_blank" class="title-link">
+                🍺 삿포로 맥주박물관 & 시음
+              </a>
+              <a href="https://www.google.com/maps/search/Sapporo+Beer+Museum" target="_blank" class="map-btn">📍 지도</a>
+            </div>
+            <div class="card-body">
+              <ul>
+                <li><a href="https://www.google.com/maps/search/삿포로+맥주박물관" target="_blank" class="place-link">삿포로 맥주박물관</a> 붉은 벽돌 건물 기념사진</li>
+                <li><strong>성인:</strong> 삿포로 맥주 3종 샘플러 (1,000엔) / <strong>어린이:</strong> 홋카이도 우유 아이스크림 (400엔)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item move" id="item-d2-4" data-start="14:00" data-end="14:30">
+          <div class="timeline-dot"></div>
+          <div class="card">
+            <div class="card-header">
+              <div class="header-badges">
+                <span class="time-badge">⏰ 14:00 ~ 14:30</span>
+                <span class="type-badge badge-move">택시 이동</span>
+                <span class="current-pill">● 지금 일정</span>
+              </div>
+            </div>
+            <div class="card-title">
+              <a href="https://www.google.com/maps/search/오도리공원" target="_blank" class="title-link">
+                🚕 맥주박물관 ➔ 오도리 공원 이동
+              </a>
+              <a href="https://www.google.com/maps/search/오도리공원" target="_blank" class="map-btn">📍 지도</a>
+            </div>
+            <div class="card-body">
+              <ul>
+                <li>택시 2대 탑승하여 <a href="https://www.google.com/maps/search/오도리공원" target="_blank" class="place-link">오도리 공원</a>으로 이동 (약 1,400엔/대)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item tour" id="item-d2-5" data-start="14:30" data-end="18:00">
+          <div class="timeline-dot"></div>
+          <div class="card">
+            <div class="card-header">
+              <div class="header-badges">
+                <span class="time-badge">⏰ 14:30 ~ 18:00</span>
+                <span class="type-badge badge-tour">축제/디저트</span>
+                <span class="current-pill">● 지금 일정</span>
+              </div>
+            </div>
+            <div class="card-title">
+              <a href="https://www.google.com/maps/search/삿포로+오텀+페스트+오도리공원" target="_blank" class="title-link">
+                🍁 오도리 공원 & 삿포로 오텀 페스트
+              </a>
+              <a href="https://www.google.com/maps/search/오도리공원+삿포로+TV타워" target="_blank" class="map-btn">📍 지도</a>
+            </div>
+            <div class="card-body">
+              <ul>
+                <li><strong>삿포로 오텀 페스트:</strong> 9월 오도리 공원 전역의 가을 미식 축제 부스 탐방!</li>
+                <li><a href="https://www.google.com/maps/search/Kinotoya+Odori+Park" target="_blank" class="place-link">키노토야 오도리공원점</a>: 소프트아이스크림 & 애플파이</li>
+                <li><a href="https://www.google.com/maps/search/삿포로+TV타워" target="_blank" class="place-link">삿포로 TV타워</a> 배경 산책</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item shop" id="item-d2-6" data-start="18:00" data-end="19:30">
+          <div class="timeline-dot"></div>
+          <div class="card">
+            <div class="card-header">
+              <div class="header-badges">
+                <span class="time-badge">⏰ 18:00 ~ 19:30</span>
+                <span class="type-badge badge-shop">브랜드 쇼핑</span>
+                <span class="current-pill">● 지금 일정</span>
+              </div>
+            </div>
+            <div class="card-title">
+              <span class="title-link">🛍️ 바오바오 & 아크테릭스 쇼핑</span>
+              <a href="https://www.google.com/maps/search/Sapporo+PARCO" target="_blank" class="map-btn">📍 파르코 지도</a>
+            </div>
+            <div class="card-body">
+              <ul>
+                <li><strong>👜 바오바오 (BAO BAO ISSEY MIYAKE):</strong><br>
+                  • <a href="https://www.google.com/maps/search/BAO+BAO+ISSEY+MIYAKE+SAPPORO+PARCO" target="_blank" class="place-link">삿포로 파르코(PARCO) 1층 매장</a> (오도리역 직결)<br>
+                  • (또는 삿포로역 복귀 후 <a href="https://www.google.com/maps/search/Daimaru+Sapporo" target="_blank" class="place-link">다이마루 백화점 5층 매장</a>)
+                </li>
+                <li><strong>🧗 아크테릭스 (ARC'TERYX):</strong><br>
+                  • <a href="https://www.google.com/maps/search/Arc'teryx+Sapporo" target="_blank" class="place-link">아크테릭스 삿포로 브랜드스토어</a> (파르코 맞은편 도보 1분 플래그십 매장)
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item move" id="item-d2-7" data-start="19:30" data-end="21:00">
+          <div class="timeline-dot"></div>
+          <div class="card">
+            <div class="card-header">
+              <div class="header-badges">
+                <span class="time-badge">⏰ 19:30 ~ 21:00</span>
+                <span class="type-badge badge-shop">역 주변 쇼핑</span>
+                <span class="current-pill">● 지금 일정</span>
+              </div>
+            </div>
+            <div class="card-title">
+              <a href="https://www.google.com/maps/search/Daimaru+Sapporo" target="_blank" class="title-link">
+                🏬 삿포로역 이동 & 다이마루 백화점
+              </a>
+              <a href="https://www.google.com/maps/search/Daimaru+Sapporo" target="_blank" class="map-btn">📍 지도</a>
+            </div>
+            <div class="card-body">
+              <ul>
+                <li>오도리에서 삿포로역으로 택시 이동 (약 1,400엔)</li>
+                <li><a href="https://www.google.com/maps/search/Daimaru+Sapporo" target="_blank" class="place-link">다이마루 백화점 삿포로점</a> 지하 식품관 구경</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item stay" id="item-d2-8" data-start="21:00" data-end="24:00">
+          <div class="timeline-dot"></div>
+          <div class="card">
+            <div class="card-header">
+              <div class="header-badges">
+                <span class="time-badge">⏰ 21:00 ~</span>
+                <span class="type-badge badge-stay">휴식 & 야식</span>
+                <span class="current-pill">● 지금 일정</span>
+              </div>
+            </div>
+            <div class="card-title">
+              <a href="https://www.google.com/maps/search/세이코마트+삿포로역" target="_blank" class="title-link">
+                🍙 세이코마트 핫셰프 야식 & 휴식
+              </a>
+              <a href="https://www.google.com/maps/search/세이코마트+삿포로역" target="_blank" class="map-btn">📍 지도</a>
+            </div>
+            <div class="card-body">
+              <ul>
+                <li>숙소 복귀 및 휴식</li>
+                <li><a href="https://www.google.com/maps/search/세이코마트+삿포로역" target="_blank" class="place-link">세이코마트</a> 핫셰프 명란 오니기리 & 치킨가라아게 야식</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3일차 : 2026-09-13(일) -->
+    <div id="day-3" class="day-section day-3">
+      <div class="day-summary-card">
+        <span class="summary-badge">DAY 3 · 2026.09.13 (일)</span>
+        <h2 class="summary-title">비에이 버스 일일 투어 🚌 & 저녁 다루마 징기스칸</h2>
+        <p class="summary-desc">사계채의 언덕, 패치워크 길, 준페이 에비동, 청의 호수, 흰수염 폭포, 팜 토미타 완전 정복</p>
+      </div>
+
+      <div class="timeline">
+        <div class="timeline-item move" id="item-d3-1" data-start="06:30" data-end="07:10">
+          <div class="timeline-dot"></div>
+          <div class="card">
+            <div class="card-header">
+              <div class="header-badges">
+                <span class="time-badge">⏰ 06:30 ~ 07:10</span>
+                <span class="type-badge badge-move">투어 집결</span>
+                <span class="current-pill">● 지금 일정</span>
+              </div>
+            </div>
+            <div class="card-title">
+              <a href="https://www.google.com/maps/search/삿포로역+북쪽출구+단체버스정류장" target="_blank" class="title-link">
+                🚌 삿포로역 북쪽출구 투어 버스 탑승
+              </a>
+              <a href="https://www.google.com/maps/search/삿포로역+북쪽출구" target="_blank" class="map-btn">📍 지도</a>
+            </div>
+            <div class="card-body">
+              <ul>
+                <li><strong>집합 장소:</strong> <a href="https://www.google.com/maps/search/삿포로역+북쪽출구" target="_blank" class="place-link">JR 삿포로역 북쪽출구</a> 종합안내실 앞 (06:40 도착 필수)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item move" id="item-d3-2" data-start="07:10" data-end="10:00">
+          <div class="timeline-dot"></div>
+          <div class="card">
+            <div class="card-header">
+              <div class="header-badges">
+                <span class="time-badge">⏰ 07:10 ~ 10:00</span>
+                <span class="type-badge badge-move">이동/휴게소</span>
+                <span class="current-pill">● 지금 일정</span>
+              </div>
+            </div>
+            <div class="card-title">
+              <a href="https://www.google.com/maps/search/스나가와+휴게소" target="_blank" class="title-link">
+                ☕ 비에이로 이동 (고속도로 휴게소 1회)
+              </a>
+              <a href="https://www.google.com/maps/search/스나가와+휴게소" target="_blank" class="map-btn">📍 지도</a>
+            </div>
+            <div class="card-body">
+              <ul>
+                <li><a href="https://www.google.com/maps/search/스나가와+휴게소" target="_blank" class="place-link">고속도로 휴게소(스나가와 등)</a> 15분 정차</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item tour" id="item-d3-3" data-start="10:00" data-end="10:50">
+          <div class="timeline-dot"></div>
+          <div class="card">
+            <div class="card-header">
+              <div class="header-badges">
+                <span class="time-badge">⏰ 10:00 ~ 10:50</span>
+                <span class="type-badge badge-tour">비에이 명소</span>
+                <span class="current-pill">● 지금 일정</span>
+              </div>
+            </div>
+            <div class="card-title">
+              <a href="https://www.google.com/maps/search/Shikisai-no-Oka+Biei" target="_blank" class="title-link">
+                🌸 사계채의 언덕 (시키사이노오카)
+              </a>
+              <a href="https://www.google.com/maps/search/Shikisai-no-Oka+Biei" target="_blank" class="map-btn">📍 지도</a>
+            </div>
+            <div class="card-body">
+              <ul>
+                <li><a href="https://www.google.com/maps/search/Shikisai-no-Oka+Biei" target="_blank" class="place-link">사계채의 언덕</a> 무지개 꽃밭 파노라마</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item tour" id="item-d3-4" data-start="11:05" data-end="11:30">
+          <div class="timeline-dot"></div>
+          <div class="card">
+            <div class="card-header">
+              <div class="header-badges">
+                <span class="time-badge">⏰ 11:05 ~ 11:30</span>
+                <span class="type-badge badge-tour">비에이 명소</span>
+                <span class="current-pill">● 지금 일정</span>
+              </div>
+            </div>
+            <div class="card-title">
+              <a href="https://www.google.com/maps/search/Patchwork+Road+Biei" target="_blank" class="title-link">
+                🌲 패치워크 로드 (세븐스타·켄과메리 나무)
+              </a>
+              <a href="https://www.google.com/maps/search/Seven+Stars+Tree+Biei" target="_blank" class="map-btn">📍 지도</a>
+            </div>
+            <div class="card-body">
+              <ul>
+                <li><a href="https://www.google.com/maps/search/Seven+Stars+Tree+Biei" target="_blank" class="place-link">세븐스타 나무</a>, <a href="https://www.google.com/maps/search/Ken+and+Mary+Tree+Biei" target="_blank" class="place-link">켄과 메리의 나무</a> 관람</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item food" id="item-d3-5" data-start="11:45" data-end="12:55">
+          <div class="timeline-dot"></div>
+          <div class="card">
+            <div class="card-header">
+              <div class="header-badges">
+                <span class="time-badge">⏰ 11:45 ~ 12:55</span>
+                <span class="type-badge badge-food">점심식사</span>
+                <span class="current-pill">● 지금 일정</span>
+              </div>
+            </div>
+            <div class="card-title">
+              <a href="https://www.google.com/maps/search/Junpei+Biei" target="_blank" class="title-link">
+                🍤 점심: 비에이 준페이 (에비동)
+              </a>
+              <a href="https://www.google.com/maps/search/Junpei+Biei" target="_blank" class="map-btn">📍 지도</a>
+            </div>
+            <div class="card-body">
+              <ul>
+                <li><a href="https://www.google.com/maps/search/Junpei+Biei" target="_blank" class="place-link">비에이 준페이(Junpei)</a> 명물 바삭 통새우 튀김덮밥</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item tour" id="item-d3-6" data-start="13:15" data-end="13:45">
+          <div class="timeline-dot"></div>
+          <div class="card">
+            <div class="card-header">
+              <div class="header-badges">
+                <span class="time-badge">⏰ 13:15 ~ 13:45</span>
+                <span class="type-badge badge-tour">비에이 명소</span>
+                <span class="current-pill">● 지금 일정</span>
+              </div>
+            </div>
+            <div class="card-title">
+              <a href="https://www.google.com/maps/search/Shirogane+Blue+Pond+Biei" target="_blank" class="title-link">
+                🌊 청의 호수 (아오이이케)
+              </a>
+              <a href="https://www.google.com/maps/search/Shirogane+Blue+Pond+Biei" target="_blank" class="map-btn">📍 지도</a>
+            </div>
+            <div class="card-body">
+              <ul>
+                <li><a href="https://www.google.com/maps/search/Shirogane+Blue+Pond+Biei" target="_blank" class="place-link">청의 호수(아오이이케)</a> 코발트블루 절경</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item tour" id="item-d3-7" data-start="13:50" data-end="14:05">
+          <div class="timeline-dot"></div>
+          <div class="card">
+            <div class="card-header">
+              <div class="header-badges">
+                <span class="time-badge">⏰ 13:50 ~ 14:05</span>
+                <span class="type-badge badge-tour">비에이 명소</span>
+                <span class="current-pill">● 지금 일정</span>
+              </div>
+            </div>
+            <div class="card-title">
+              <a href="https://www.google.com/maps/search/Shirahige+Waterfall+Biei" target="_blank" class="title-link">
+                💧 흰수염 폭포 (시라히게 폭포)
+              </a>
+              <a href="https://www.google.com/maps/search/Shirahige+Waterfall+Biei" target="_blank" class="map-btn">📍 지도</a>
+            </div>
+            <div class="card-body">
+              <ul>
+                <li><a href="https://www.google.com/maps/search/Shirahige+Waterfall+Biei" target="_blank" class="place-link">흰수염 폭포</a> 암벽 폭포 감상</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item tour" id="item-d3-8" data-start="14:45" data-end="15:15">
+          <div class="timeline-dot"></div>
+          <div class="card">
+            <div class="card-header">
+              <div class="header-badges">
+                <span class="time-badge">⏰ 14:45 ~ 15:15</span>
+                <span class="type-badge badge-tour">후라노 명소</span>
+                <span class="current-pill">● 지금 일정</span>
+              </div>
+            </div>
+            <div class="card-title">
+              <a href="https://www.google.com/maps/search/Farm+Tomita+Furano" target="_blank" class="title-link">
+                💐 팜 토미타 (Farm Tomita)
+              </a>
+              <a href="https://www.google.com/maps/search/Farm+Tomita+Furano" target="_blank" class="map-btn">📍 지도</a>
+            </div>
+            <div class="card-body">
+              <ul>
+                <li><a href="https://www.google.com/maps/search/Farm+Tomita+Furano" target="_blank" class="place-link">팜 토미타(Farm Tomita)</a> 라벤더·가을 꽃밭 정원 관람</li>
+                <li><strong>간식:</strong> 라벤더 소프트 아이스크림 & 후라노 멜론 조각</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item move" id="item-d3-9" data-start="15:15" data-end="17:30">
+          <div class="timeline-dot"></div>
+          <div class="card">
+            <div class="card-header">
+              <div class="header-badges">
+                <span class="time-badge">⏰ 15:15 ~ 17:30</span>
+                <span class="type-badge badge-move">복귀</span>
+                <span class="current-pill">● 지금 일정</span>
+              </div>
+            </div>
+            <div class="card-title">
+              <a href="https://www.google.com/maps/search/스스키노역" target="_blank" class="title-link">
+                🚌 비에이 ➔ 스스키노역 복귀
+              </a>
+              <a href="https://www.google.com/maps/search/스스키노역" target="_blank" class="map-btn">📍 지도</a>
+            </div>
+            <div class="card-body">
+              <ul>
+                <li>투어 버스 탑승 후 <a href="https://www.google.com/maps/search/스스키노역" target="_blank" class="place-link">스스키노역</a>으로 복귀 및 하차</li>
+                <li>하차 후 바로 저녁 식사 및 스스키노 거리 도보 이동</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item food" id="item-d3-10" data-start="18:00" data-end="19:30">
+          <div class="timeline-dot"></div>
+          <div class="card">
+            <div class="card-header">
+              <div class="header-badges">
+                <span class="time-badge">⏰ 18:00 ~ 19:30</span>
+                <span class="type-badge badge-food">저녁식사</span>
+                <span class="current-pill">● 지금 일정</span>
+              </div>
+            </div>
+            <div class="card-title">
+              <a href="https://www.google.com/maps/search/Daruma+7.4+Sapporo" target="_blank" class="title-link">
+                🥩 저녁: 징기스칸 다루마 7.4점
+              </a>
+              <a href="https://www.google.com/maps/search/Daruma+7.4+Sapporo" target="_blank" class="map-btn">📍 지도</a>
+            </div>
+            <div class="card-body">
+              <ul>
+                <li><a href="https://www.google.com/maps/search/Daruma+7.4+Sapporo" target="_blank" class="place-link">징기스칸 다루마 7.4점</a>: 스스키노 대표 양고기 구이</li>
+              </ul>
+              <div class="tip-box warning">
+                <div class="tip-title">⚡ 웨이팅 팁</div>
+                저녁 피크타임 시 20~25팀 대기 발생 가능. 인근 분점(4.4, 5.5 등) 대기줄 비교 권장
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item tour" id="item-d3-11" data-start="19:30" data-end="21:00">
+          <div class="timeline-dot"></div>
+          <div class="card">
+            <div class="card-header">
+              <div class="header-badges">
+                <span class="time-badge">⏰ 19:30 ~ 21:00</span>
+                <span class="type-badge badge-tour">스스키노 밤거리</span>
+                <span class="current-pill">● 지금 일정</span>
+              </div>
+            </div>
+            <div class="card-title">
+              <a href="https://www.google.com/maps/search/Nikka+Signboard+Susukino" target="_blank" class="title-link">
+                🥃 스스키노 거리 & 니카상 인증샷
+              </a>
+              <a href="https://www.google.com/maps/search/Nikka+Signboard+Susukino" target="_blank" class="map-btn">📍 지도</a>
+            </div>
+            <div class="card-body">
+              <ul>
+                <li><a href="https://www.google.com/maps/search/Nikka+Signboard+Susukino" target="_blank" class="place-link">니카상(NIKKA)</a> 간판 앞 기념사진 및 밤거리 산책</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item move" id="item-d3-12" data-start="21:00" data-end="24:00">
+          <div class="timeline-dot"></div>
+          <div class="card">
+            <div class="card-header">
+              <div class="header-badges">
+                <span class="time-badge">⏰ 21:00 ~ 21:30</span>
+                <span class="type-badge badge-move">숙소 복귀</span>
+                <span class="current-pill">● 지금 일정</span>
+              </div>
+            </div>
+            <div class="card-title">
+              <a href="https://www.google.com/maps/search/Solaria+Nishitetsu+Hotel+Sapporo" target="_blank" class="title-link">
+                🚕 스스키노 ➔ 숙소 복귀 & 휴식
+              </a>
+              <a href="https://www.google.com/maps/search/Solaria+Nishitetsu+Hotel+Sapporo" target="_blank" class="map-btn">📍 지도</a>
+            </div>
+            <div class="card-body">
+              <ul>
+                <li>택시 2대로 숙소 복귀 (1대당 약 1,000엔) 및 출국 짐정리</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4일차 : 2026-09-14(월) -->
+    <div id="day-4" class="day-section day-4">
+      <div class="day-summary-card">
+        <span class="summary-badge">DAY 4 · 2026.09.14 (월)</span>
+        <h2 class="summary-title">체크아웃 🛍️ 신치토세 공항 국내선 미식 투어 및 귀국</h2>
+        <p class="summary-desc">국내선 청사 3층 라멘 골목 및 면세 쇼핑 후 인천 도착</p>
+      </div>
+
+      <div class="timeline">
+        <div class="timeline-item food" id="item-d4-1" data-start="08:30" data-end="09:30">
+          <div class="timeline-dot"></div>
+          <div class="card">
+            <div class="card-header">
+              <div class="header-badges">
+                <span class="time-badge">⏰ 08:30 ~ 09:30</span>
+                <span class="type-badge badge-skip">선택 스킵가능</span>
+                <span class="current-pill">● 지금 일정</span>
+              </div>
+            </div>
+            <div class="card-title">
+              <a href="https://www.google.com/maps/search/Sandria+Sapporo" target="_blank" class="title-link">
+                🥪 호텔 조식 or 샌드리아 샌드위치
+              </a>
+              <a href="https://www.google.com/maps/search/Sandria+Sapporo" target="_blank" class="map-btn">📍 지도</a>
+            </div>
+            <div class="card-body">
+              <ul>
+                <li>호텔 조식 (성인 3,000엔 / 소인 1,500엔) 또는 24시 수제 샌드위치 <a href="https://www.google.com/maps/search/Sandria+Sapporo" target="_blank" class="place-link">산도리아(Sandria)</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item stay" id="item-d4-2" data-start="09:30" data-end="10:30">
+          <div class="timeline-dot"></div>
+          <div class="card">
+            <div class="card-header">
+              <div class="header-badges">
+                <span class="time-badge">⏰ 09:30 ~ 10:30</span>
+                <span class="type-badge badge-stay">체크아웃</span>
+                <span class="current-pill">● 지금 일정</span>
+              </div>
+            </div>
+            <div class="card-title">
+              <a href="https://www.google.com/maps/search/Solaria+Nishitetsu+Hotel+Sapporo" target="_blank" class="title-link">
+                🧳 짐정리 및 호텔 체크아웃
+              </a>
+              <a href="https://www.google.com/maps/search/Solaria+Nishitetsu+Hotel+Sapporo" target="_blank" class="map-btn">📍 지도</a>
+            </div>
+            <div class="card-body">
+              <ul>
+                <li>객실 비품 확인 후 체크아웃 완료</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item move" id="item-d4-3" data-start="10:30" data-end="11:37">
+          <div class="timeline-dot"></div>
+          <div class="card">
+            <div class="card-header">
+              <div class="header-badges">
+                <span class="time-badge">⏰ 10:30 ~ 11:37</span>
+                <span class="type-badge badge-move">JR 이동</span>
+                <span class="current-pill">● 지금 일정</span>
+              </div>
+            </div>
+            <div class="card-title">
+              <a href="https://www.google.com/maps/search/신치토세공항역+JR" target="_blank" class="title-link">
+                🚆 삿포로역 ➔ 신치토세 공항 이동
+              </a>
+              <a href="https://www.google.com/maps/search/신치토세공항역+JR" target="_blank" class="map-btn">📍 지도</a>
+            </div>
+            <div class="card-body">
+              <ul>
+                <li><strong>열차편:</strong> JR 쾌속 에어포트 (약 37분 소요)</li>
+                <li><strong>최신 요금:</strong> 성인 자유석 1,150엔 / 지정석 1,990엔 (어린이 반값)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item food" id="item-d4-4" data-start="11:37" data-end="13:15">
+          <div class="timeline-dot"></div>
+          <div class="card">
+            <div class="card-header">
+              <div class="header-badges">
+                <span class="time-badge">⏰ 11:37 ~ 13:15</span>
+                <span class="type-badge badge-food">공항 미식 투어</span>
+                <span class="current-pill">● 지금 일정</span>
+              </div>
+            </div>
+            <div class="card-title">
+              <a href="https://www.google.com/maps/search/Ebisoba+Ichigen+New+Chitose+Airport" target="_blank" class="title-link">
+                🍜 공항 짐 체크인 & 국내선 맛집 탐방
+              </a>
+              <a href="https://www.google.com/maps/search/신치토세공항+국내선터미널" target="_blank" class="map-btn">📍 지도</a>
+            </div>
+            <div class="card-body">
+              <ul>
+                <li><strong>국내선 3층 홋카이도 라멘 도장:</strong> <a href="https://www.google.com/maps/search/Ebisoba+Ichigen+New+Chitose+Airport" target="_blank" class="place-link">에비소바 이치겐</a> 새우라멘 맛보기</li>
+                <li><strong>디저트 쇼핑:</strong> <a href="https://www.google.com/maps/search/Kinotoya+New+Chitose+Airport" target="_blank" class="place-link">키노토야</a>, 로이스, 르타오</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item move" id="item-d4-5" data-start="13:15" data-end="14:30">
+          <div class="timeline-dot"></div>
+          <div class="card">
+            <div class="card-header">
+              <div class="header-badges">
+                <span class="time-badge">⏰ 13:15 ~ 14:30</span>
+                <span class="type-badge badge-move">출국수속</span>
+                <span class="current-pill">● 지금 일정</span>
+              </div>
+            </div>
+            <div class="card-title">
+              <a href="https://www.google.com/maps/search/신치토세공항+국제선터미널" target="_blank" class="title-link">
+                🛂 국제선 출국 심사 & 탑승구 이동
+              </a>
+              <a href="https://www.google.com/maps/search/신치토세공항+국제선터미널" target="_blank" class="map-btn">📍 지도</a>
+            </div>
+            <div class="card-body">
+              <ul>
+                <li>보안검색 및 출국 심사 완료 후 탑승구 대기</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item move" id="item-d4-6" data-start="14:30" data-end="18:30">
+          <div class="timeline-dot"></div>
+          <div class="card">
+            <div class="card-header">
+              <div class="header-badges">
+                <span class="time-badge">⏰ 14:30 ~ 18:30</span>
+                <span class="type-badge badge-move">귀국</span>
+                <span class="current-pill">● 지금 일정</span>
+              </div>
+            </div>
+            <div class="card-title">
+              <a href="https://www.google.com/maps/search/인천국제공항" target="_blank" class="title-link">
+                🛬 신치토세 출발 ➔ 인천공항 도착
+              </a>
+              <a href="https://www.google.com/maps/search/인천국제공항" target="_blank" class="map-btn">📍 지도</a>
+            </div>
+            <div class="card-body">
+              <ul>
+                <li>14:30 이륙 ➔ 18:30 <a href="https://www.google.com/maps/search/인천국제공항" target="_blank" class="place-link">인천공항</a> 도착 및 귀가</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div class="quick-action-bar">
+    <button class="quick-btn" onclick="scrollToTop()">
+      <span>⬆️</span>
+      <span>맨위로</span>
+    </button>
+    <button class="quick-btn now-btn" onclick="applySmartFocus(true)">
+      <span>🎯</span>
+      <span>지금일정</span>
+    </button>
+    <button class="quick-btn" onclick="switchDay('day-1', document.getElementById('tab-day-1'))">
+      <span>1️⃣</span>
+      <span>1일차</span>
+    </button>
+    <button class="quick-btn" onclick="switchDay('day-2', document.getElementById('tab-day-2'))">
+      <span>2️⃣</span>
+      <span>2일차</span>
+    </button>
+    <button class="quick-btn" onclick="switchDay('day-3', document.getElementById('tab-day-3'))">
+      <span>3️⃣</span>
+      <span>3일차</span>
+    </button>
+    <button class="quick-btn" onclick="switchDay('day-4', document.getElementById('tab-day-4'))">
+      <span>4️⃣</span>
+      <span>4일차</span>
+    </button>
+  </div>
+
+  <script>
+    const TRIP_START_DATE = '2026-09-11';
+    const TRIP_END_DATE = '2026-09-14';
+
+    function switchDay(dayId, btnElement) {
+      const tabBtns = document.querySelectorAll('.tab-btn');
+      tabBtns.forEach(btn => btn.classList.remove('active'));
+      if (btnElement) {
+        btnElement.classList.add('active');
+      } else {
+        const targetBtn = document.getElementById('tab-' + dayId);
+        if (targetBtn) targetBtn.classList.add('active');
+      }
+
+      const sections = document.querySelectorAll('.day-section');
+      if (dayId === 'day-all') {
+        sections.forEach(sec => sec.classList.add('active'));
+      } else {
+        sections.forEach(sec => {
+          if (sec.id === dayId) {
+            sec.classList.add('active');
+          } else {
+            sec.classList.remove('active');
+          }
+        });
+      }
+    }
+
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function applySmartFocus(userTriggered = false) {
+      document.querySelectorAll('.timeline-item').forEach(item => {
+        item.classList.remove('current-active');
+      });
+
+      const liveDot = document.getElementById('liveDot');
+      const statusText = document.getElementById('liveStatusText');
+
+      const now = new Date();
+      const todayStr = now.getFullYear() + '-' + String(now.getMonth() + 1).padStart(2, '0') + '-' + String(now.getDate()).padStart(2, '0');
+
+      const startD = new Date(TRIP_START_DATE + 'T00:00:00');
+      const currentD = new Date(todayStr + 'T00:00:00');
+      const diffTime = currentD - startD;
+      const diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24)); 
+
+      if (diffDays >= 0 && diffDays <= 3) {
+        const targetDayIndex = diffDays + 1;
+        const currentHours = now.getHours();
+        const currentMinutes = now.getMinutes();
+        const currentTotalMin = currentHours * 60 + currentMinutes;
+
+        const daySectionId = 'day-' + targetDayIndex;
+        const dayItems = document.querySelectorAll('#' + daySectionId + ' .timeline-item[data-start]');
+        
+        let matchedItem = null;
+        for (const item of dayItems) {
+          const startStr = item.getAttribute('data-start');
+          const endStr = item.getAttribute('data-end');
+          if (startStr && endStr) {
+            const [sH, sM] = startStr.split(':').map(Number);
+            const [eH, eM] = endStr.split(':').map(Number);
+            const sMin = sH * 60 + sM;
+            const eMin = eH * 60 + eM;
+
+            if (currentTotalMin >= sMin && currentTotalMin < eMin) {
+              matchedItem = item;
+              break;
+            }
+          }
+        }
+
+        if (matchedItem) {
+          matchedItem.classList.add('current-active');
+          switchDay(daySectionId, document.getElementById('tab-' + daySectionId));
+          liveDot.className = 'live-dot active';
+
+          const timeStr = matchedItem.getAttribute('data-start') + ' ~ ' + matchedItem.getAttribute('data-end');
+          const title = matchedItem.querySelector('.card-title').innerText.replace('📍 지도', '').trim();
+          statusText.innerHTML = `<b>${targetDayIndex}일차 진행 중:</b> [${timeStr}] ${title}`;
+
+          scrollFocus(matchedItem);
+          return;
+        } else {
+          const firstOfDay = document.querySelector('#' + daySectionId + ' .timeline-item');
+          if (firstOfDay) {
+            firstOfDay.classList.add('current-active');
+            switchDay(daySectionId, document.getElementById('tab-' + daySectionId));
+            liveDot.className = 'live-dot active';
+            statusText.innerHTML = `<b>${targetDayIndex}일차 (${todayStr}) 진행 중</b>`;
+            scrollFocus(firstOfDay);
+            return;
+          }
+        }
+      } else if (diffDays > 3) {
+        statusText.innerHTML = `🏁 삿포로 여행 완료 (일정 전체보기)`;
+        liveDot.className = 'live-dot';
+        switchDay('day-all', document.getElementById('tab-day-all'));
+        return;
+      }
+
+      const firstItem = document.getElementById('item-d1-1');
+      if (firstItem) {
+        firstItem.classList.add('current-active');
+        const pill = document.getElementById('pill-d1-1');
+        if (pill) pill.innerText = '● 첫 일정';
+
+        const dDayText = Math.abs(diffDays);
+        statusText.innerHTML = `🛫 출발 D-${dDayText}일 전 (1일차 첫 일정 안내)`;
+        liveDot.className = 'live-dot ready';
+
+        switchDay('day-1', document.getElementById('tab-day-1'));
+        scrollFocus(firstItem);
+      }
+    }
+
+    function scrollFocus(targetElement) {
+      setTimeout(() => {
+        const rect = targetElement.getBoundingClientRect();
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        window.scrollTo({
+          top: scrollTop + rect.top - 150,
+          behavior: 'smooth'
+        });
+      }, 150);
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      applySmartFocus(false);
+    });
+  </script>
+</body>
+</html>
